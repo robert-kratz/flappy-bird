@@ -4,15 +4,17 @@ export class InputManager {
   private touchStartTime: number = 0;
   private readonly doubleTapThreshold: number = 300; // milliseconds
   private lastTapTime: number = 0;
+  private canvas: HTMLCanvasElement;
 
-  constructor() {
+  constructor(canvas: HTMLCanvasElement) {
+    this.canvas = canvas;
     this.handleInput = this.handleInput.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleTouch = this.handleTouch.bind(this);
     
     // Add event listeners with passive: false to prevent delay
-    window.addEventListener('mousedown', this.handleInput);
-    window.addEventListener('touchstart', this.handleTouch, { passive: false });
+    this.canvas.addEventListener('mousedown', this.handleInput);
+    this.canvas.addEventListener('touchstart', this.handleTouch, { passive: false });
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
@@ -82,8 +84,8 @@ export class InputManager {
   }
 
   public cleanup(): void {
-    window.removeEventListener('mousedown', this.handleInput);
-    window.removeEventListener('touchstart', this.handleTouch);
+    this.canvas.removeEventListener('mousedown', this.handleInput);
+    this.canvas.removeEventListener('touchstart', this.handleTouch);
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 }

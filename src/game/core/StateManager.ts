@@ -60,7 +60,7 @@ export class GameStateManager {
 
     // Initialize managers
     this.bird = new Bird(canvas.width * 0.3, canvas.height * 0.5, this.assets);
-    this.inputManager = new InputManager();
+    this.inputManager = new InputManager(canvas);
     this.audioManager = AudioManager.getInstance();
 
     // Load high score from localStorage
