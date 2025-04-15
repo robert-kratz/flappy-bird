@@ -3,12 +3,12 @@ import { Howl } from 'howler';
 export class AudioManager {
   private static instance: AudioManager;
   private sounds: Map<string, Howl>;
-  private is911Mode: boolean;
+  private isBlackHumorMode: boolean;
   private muted: boolean = false;
 
   private constructor() {
     this.sounds = new Map();
-    this.is911Mode = window.location.pathname === '/911';
+    this.isBlackHumorMode = window.location.pathname === '/black-humor';
     this.initializeSounds();
     
     // Load mute state from localStorage
@@ -42,9 +42,9 @@ export class AudioManager {
       volume: 0.5
     }));
 
-    // Use explosion sound for 911 mode, die sound for normal mode
+    // Use explosion sound for black humor mode, die sound for normal mode
     this.sounds.set('hit', new Howl({
-      src: [this.is911Mode ? '/sounds/explosion.mp3' : '/sounds/die.mp3'],
+      src: [this.isBlackHumorMode ? '/sounds/explosion.mp3' : '/sounds/die.mp3'],
       volume: 0.5
     }));
   }

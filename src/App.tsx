@@ -5,14 +5,14 @@ import GameComponent from './components/GameComponent';
 
 function GamePage() {
   const location = useLocation();
-  const is911Page = location.pathname === '/911';
+  const isBlackHumorPage = location.pathname === '/black-humor';
 
   return (
     <>
       <Helmet>
-        <title>{is911Page ? 'Flight Simulator' : 'Flappy Bird Game'}</title>
-        <meta name="description" content={is911Page ? 'Flight simulator game' : 'Play the classic Flappy Bird game - Test your skills and beat your high score in this addictive arcade game!'} />
-        <meta name="robots" content={is911Page ? 'noindex, nofollow' : 'index, follow'} />
+        <title>{isBlackHumorPage ? 'Flight Simulator' : 'Flappy Bird Game'}</title>
+        <meta name="description" content={isBlackHumorPage ? 'Flight simulator game' : 'Play the classic Flappy Bird game - Test your skills and beat your high score in this addictive arcade game!'} />
+        <meta name="robots" content={isBlackHumorPage ? 'noindex, nofollow' : 'index, follow'} />
       </Helmet>
       <GameComponent />
     </>
@@ -24,7 +24,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<GamePage />} />
-        <Route path="/911" element={<GamePage />} />
+        <Route path="/black-humor" element={<GamePage />} />
       </Routes>
     </Router>
   );

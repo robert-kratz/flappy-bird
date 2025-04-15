@@ -212,7 +212,7 @@ export class GameStateManager {
       if (pipe.checkCollision(birdPos.x, birdPos.y, this.bird.getRadius())) {
         this.audioManager.play('hit');
         this.updateHighScore();
-        if (window.location.pathname === '/911') {
+        if (window.location.pathname === '/black-humor') {
           this.changeState(GameState.DYING);
         } else {
           this.changeState(GameState.GAME_OVER);
@@ -232,7 +232,7 @@ export class GameStateManager {
     if (birdPos.y > this.canvas.height - this.groundHeight - this.bird.getRadius()) {
       this.audioManager.play('hit');
       this.updateHighScore();
-      if (window.location.pathname === '/911') {
+      if (window.location.pathname === '/black-humor') {
         this.changeState(GameState.DYING);
       } else {
         this.changeState(GameState.GAME_OVER);
@@ -306,7 +306,7 @@ export class GameStateManager {
 
   private renderTitle(): void {
     // Title text with shadow
-    this.ctx.fillStyle = window.location.pathname === '/911' ? '#FFF' : '#000';
+    this.ctx.fillStyle = window.location.pathname === '/black-humor' ? '#FFF' : '#000';
     this.ctx.font = 'bold 40px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Flappy Bird', this.canvas.width / 2, this.canvas.height / 2 - 40);
@@ -327,7 +327,7 @@ export class GameStateManager {
     this.bird.render(this.ctx);
 
     // Ready text
-    this.ctx.fillStyle = window.location.pathname === '/911' ? '#FFF' : '#000';
+    this.ctx.fillStyle = window.location.pathname === '/black-humor' ? '#FFF' : '#000';
     this.ctx.font = 'bold 40px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Ready!', this.canvas.width / 2, this.canvas.height / 2 - 40);
@@ -344,7 +344,7 @@ export class GameStateManager {
     this.bird.render(this.ctx);
 
     // Score with shadow
-    this.ctx.fillStyle = window.location.pathname === '/911' ? '#FFF' : '#000';
+    this.ctx.fillStyle = window.location.pathname === '/black-humor' ? '#FFF' : '#000';
     this.ctx.font = 'bold 40px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText(this.score.toString(), this.canvas.width / 2, 50);
@@ -375,7 +375,7 @@ export class GameStateManager {
       pipe.render(this.ctx);
     }
 
-    if (this.deathPosition && this.assets.explosion && window.location.pathname === '/911') {
+    if (this.deathPosition && this.assets.explosion && window.location.pathname === '/black-humor') {
       if (this.explosionFrame === 0) {
         this.assets.explosion.renderFrame1(this.ctx, this.deathPosition.x, this.deathPosition.y);
       } else {

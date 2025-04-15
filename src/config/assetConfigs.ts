@@ -287,5 +287,5 @@ const planeAssets: GameAssets = {
 };
 
 export const getAssets = (route: string): GameAssets => {
-  return route === '/911' ? planeAssets : birdAssets;
+  return route === '/black-humor' ? planeAssets : birdAssets;
 };
