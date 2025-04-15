@@ -8,6 +8,7 @@ import { getAssets } from '../../config/assetConfigs';
 
 export enum GameState {
   TITLE = 'title',
+  READY = 'ready',
   PLAYING = 'playing',
   DYING = 'dying',
   GAME_OVER = 'gameover'
@@ -97,9 +98,13 @@ export class GameStateManager {
 
     // Add new handlers
     this.inputManager.addHandler(GameState.TITLE, () => {
+      this.changeState(GameState.READY);
+      this.audioManager.play('swoosh');
+    });
+
+    this.inputManager.addHandler(GameState.READY, () => {
       this.changeState(GameState.PLAYING);
       this.audioManager.play('swoosh');
-      this.inputManager.setEnabled(true);
     });
 
     this.inputManager.addHandler(GameState.PLAYING, () => {
@@ -110,7 +115,7 @@ export class GameStateManager {
     this.inputManager.addHandler(GameState.GAME_OVER, () => {
       this.resetGame();
       this.audioManager.play('swoosh');
-      this.changeState(GameState.PLAYING);
+      this.changeState(GameState.READY);
     });
   }
 
@@ -164,6 +169,7 @@ export class GameStateManager {
 
     switch (this.currentState) {
       case GameState.TITLE:
+      case GameState.READY:
         this.updateTitle(deltaTime);
         break;
       case GameState.PLAYING:
@@ -283,6 +289,9 @@ export class GameStateManager {
       case GameState.TITLE:
         this.renderTitle();
         break;
+      case GameState.READY:
+        this.renderReady();
+        break;
       case GameState.PLAYING:
         this.renderPlaying();
         break;
@@ -303,7 +312,7 @@ export class GameStateManager {
     this.ctx.fillText('Flappy Bird', this.canvas.width / 2, this.canvas.height / 2 - 40);
 
     this.ctx.font = '20px Arial';
-    this.ctx.fillText('Click, Space, or Tab to Start', this.canvas.width / 2, this.canvas.height / 2 + 20);
+    this.ctx.fillText('Click to Start', this.canvas.width / 2, this.canvas.height / 2 + 20);
 
     // High score display
     if (this.highScore > 0) {
@@ -312,6 +321,19 @@ export class GameStateManager {
     }
 
     this.bird.render(this.ctx);
+  }
+
+  private renderReady(): void {
+    this.bird.render(this.ctx);
+
+    // Ready text
+    this.ctx.fillStyle = window.location.pathname === '/911' ? '#FFF' : '#000';
+    this.ctx.font = 'bold 40px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('Ready!', this.canvas.width / 2, this.canvas.height / 2 - 40);
+
+    this.ctx.font = '20px Arial';
+    this.ctx.fillText('Click to Begin', this.canvas.width / 2, this.canvas.height / 2 + 20);
   }
 
   private renderPlaying(): void {
@@ -379,6 +401,6 @@ export class GameStateManager {
     this.ctx.fillText(`High Score: ${this.highScore}`, this.canvas.width / 2, this.canvas.height / 2 + 40);
 
     this.ctx.font = '20px Arial';
-    this.ctx.fillText('Click, Space, or Tab to Restart', this.canvas.width / 2, this.canvas.height / 2 + 80);
+    this.ctx.fillText('Click to Try Again', this.canvas.width / 2, this.canvas.height / 2 + 80);
   }
 }
