@@ -1,7 +1,7 @@
-import {useEffect, useRef, useState} from 'react';
-import {useLocation} from 'react-router-dom';
-import {GameLoop} from '../game/core/GameLoop';
-import {GameStateManager, GameState} from '../game/core/StateManager';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { GameLoop } from '../game/core/GameLoop';
+import { GameStateManager, GameState } from '../game/core/StateManager';
 import SoundToggle from './SoundToggle';
 
 function GameComponent() {
@@ -11,8 +11,6 @@ function GameComponent() {
 
     useEffect(() => {
         if (!canvasRef.current) return;
-
-        console.log(stateManager)
 
         // Set canvas size
         canvasRef.current.width = 320;
@@ -37,13 +35,21 @@ function GameComponent() {
     }, [location.pathname]);
 
     return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center">
             <canvas
                 ref={canvasRef}
                 className="border border-gray-700 rounded-lg shadow-lg"
-                style={{imageRendering: 'pixelated'}}
+                style={{ imageRendering: 'pixelated' }}
             />
-            <SoundToggle/>
+            <a
+                href="https://github.com/robert-kratz/flappy-bird"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 text-white/80 hover:text-white transition-colors duration-200 text-sm flex items-center gap-2"
+            >
+                View on GitHub
+            </a>
+            <SoundToggle />
         </div>
     );
 }
